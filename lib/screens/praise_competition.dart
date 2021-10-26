@@ -5,6 +5,7 @@ import 'package:flutter_beautiful_popup/main.dart';
 import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:vibration/vibration.dart';
 
 class Praisecompetition extends StatefulWidget {
 
@@ -23,6 +24,8 @@ class _PraisecompetitionState extends State<Praisecompetition> {
 
   ConfettiController _controllerBottomCenter;
   var buttonColor = Colors.red;
+  bool isVibrate = true;
+  bool isSound = true;
 
   @override
   void initState() {
@@ -162,6 +165,9 @@ class _PraisecompetitionState extends State<Praisecompetition> {
                   color: buttonColor,
                   onPressed: (){
                     setState(() {
+                      if(isVibrate){
+                        Vibration.vibrate(duration: 50);
+                      }
                       if(widget.initialValue < widget.maxValue){
                         widget.initialValue++;
                         if(widget.initialValue == widget.maxValue){

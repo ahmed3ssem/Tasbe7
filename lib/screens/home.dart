@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nice_button/NiceButton.dart';
 import 'package:seb7a/helper/db_helper.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:seb7a/screens/evning_azkar.dart';
 import 'package:seb7a/screens/my_praises.dart';
 import 'package:seb7a/screens/praise.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:seb7a/screens/praise_competition.dart';
 import 'package:seb7a/widgets/show_message.dart';
+import 'package:share/share.dart';
 import 'morning_azkar.dart';
 
 class Home extends StatefulWidget {
@@ -23,6 +25,8 @@ class _HomeState extends State<Home> {
   bool checkPraiseExist;
   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
   int id;
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  FlutterLocalNotificationsPlugin();
 
   void addNewPraise(BuildContext context) async {
     return showDialog(
@@ -141,6 +145,25 @@ class _HomeState extends State<Home> {
     );
   }
 
+  void SelectedItem(BuildContext context, item) {
+    switch (item) {
+      case 0:
+        break;
+      case 1:
+        Share.share('https://play.google.com/store/apps/details?id=com.assem.tasabeh');
+        break;
+      case 2:
+        print("User Logged out");
+        break;
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,6 +171,22 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text("homeAppBarTittle".tr().toString() , style: TextStyle(fontWeight: FontWeight.bold),),
         centerTitle: true,
+        actions: [
+          Theme(
+            data: Theme.of(context).copyWith(
+                textTheme: TextTheme().apply(bodyColor: Colors.white),
+                dividerColor: Colors.white,
+                iconTheme: IconThemeData(color: Colors.white)),
+            child: PopupMenuButton<int>(
+              color: Colors.white,
+              itemBuilder: (context) => [
+                PopupMenuItem<int>(value: 0, child: Text("setting".tr().toString() , style: TextStyle(color: Colors.black),)),
+                PopupMenuItem<int>(value: 1, child: Text("shareApp".tr().toString() , style: TextStyle(color: Colors.black),)),
+              ],
+              onSelected: (item) => SelectedItem(context, item),
+            ),
+          ),
+        ],
       ),
       body:  Container(
         width: double.infinity,

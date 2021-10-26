@@ -23,17 +23,22 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  easy_localization: ^2.3.3+1
+  easy_localization: ^3.0.0
   vibration: ^1.7.3
   fluttertoast: ^8.0.6
   flutter_beautiful_popup: ^1.5.0
-  flutter_launcher_icons: "^0.8.0"
+  flutter_launcher_icons: ^0.9.2
+  flutter_native_timezone: ^2.0.0
   nice_button: ^0.1.7
   confetti: ^0.5.5
-  hexcolor: ^2.0.3
+  hexcolor: ^2.0.5
   sqflite: ^2.0.0+3
   divine_card: ^0.1.0
   share: ^2.0.4
+  timezone: ^0.8.0
+  audioplayers: ^0.20.1
+  shared_preferences: ^2.0.8
+  flutter_local_notifications: ^9.0.1
   flutter_localizations: # Add this line
     sdk: flutter
 
@@ -70,6 +75,7 @@ flutter:
     - assets/image/minus.png
     - assets/image/appicon.jpeg
     - assets/image/one.jpeg
+    - assets/sounds/buttonsound.mp3
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

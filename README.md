@@ -1,24 +1,24 @@
 # seb7a
 
-A new Flutter application that help you to praise any time. 
+A new Flutter application that help you to praise any time.
 
 Features:-
 - you can add your praisers and praise to unlimited numbers.
-- you can challenge yourself by using " تحدياتى" feature and praise to number you want to challenge yourself. 
-- you can read "morning & evening azkar" and share it. 
+- you can challenge yourself by using " تحدياتى" feature and praise to number you want to challenge yourself.
+- you can read "morning & evening azkar" and share it.
 
-Libraries Used:- 
-  - vibration: to let user know if he hit the button or not. 
-  - fluttertoast: to let user know if he wrote an error data. 
+Libraries Used:-
+  - vibration: to let user know if he hit the button or not.
+  - fluttertoast: to let user know if he wrote an error data.
   - flutter_beautiful_popup: to make design beautiful when user challenge complete.
-  - flutter_launcher_icons: to change app icon. 
+  - flutter_launcher_icons: to change app icon.
   - nice_button: to make button with nice touch.
   - confetti: to make design beautiful when user challenge complete.
   - hexcolor: to let developer use color with hexa code.
   - sqflite: to save user data offline.
   - divine_card: to make design beautiful when user challenge complete.
   - share: to let user to share his azkar.
-  
+
 
 
 For some Screenshots:-

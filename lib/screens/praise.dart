@@ -1,9 +1,11 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:seb7a/helper/db_helper.dart';
+import 'package:seb7a/helper/save_offline.dart';
 import 'package:seb7a/screens/home.dart';
 import 'package:seb7a/widgets/show_message.dart';
 import 'package:vibration/vibration.dart';
@@ -26,6 +28,10 @@ class _PraiseState extends State<Praise> {
   String name = '';
   int value = -1;
   Color buttonColor = HexColor("D6A472");
+  bool isVibrate = true;
+  bool isSound = true;
+  AudioCache _audioCache = new AudioCache();
+  final alarmAudioPath = "buttonsound.mp3";
 
   void clearPraise(BuildContext context){
     showDialog(
@@ -172,6 +178,15 @@ class _PraiseState extends State<Praise> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _audioCache = AudioCache(
+      prefix: 'assets/sounds/',
+      fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP),
+    );
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -221,8 +236,11 @@ class _PraiseState extends State<Praise> {
                   color: buttonColor,
                   onPressed: (){
                     setState(() {
+                      _audioCache.play('buttonsound.mp3');
                       widget.value++;
-                      Vibration.vibrate(duration: 50);
+                      if(isVibrate){
+                        Vibration.vibrate(duration: 50);
+                      }
                       //HapticFeedback.heavyImpact();
                       DBHelper.editValue(widget.id, widget.value).then((_) => print('success')).catchError((e) =>print(e));
                     });

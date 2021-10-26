@@ -1,15 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:seb7a/screens/home.dart';
+import 'package:seb7a/screens/splash_screen.dart';
 
-void main()=>runApp(EasyLocalization(
-  child: MyApp(),
-  path: "resources",
-  saveLocale: true,
-  supportedLocales: [
-    Locale('ar','AR'),
-  ],
-));
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  runApp(EasyLocalization(
+    child: MyApp(),
+    path: "resources",
+    saveLocale: true,
+    supportedLocales: [
+      Locale('ar','AR'),
+    ],
+  ));
+}
 
 class MyApp extends StatelessWidget{
   @override
@@ -20,7 +24,7 @@ class MyApp extends StatelessWidget{
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: SplashScreen(),
     );
   }
 }
