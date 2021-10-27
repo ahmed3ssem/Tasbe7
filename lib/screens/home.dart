@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:nice_button/NiceButton.dart';
 import 'package:seb7a/helper/db_helper.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -8,6 +9,7 @@ import 'package:seb7a/screens/my_praises.dart';
 import 'package:seb7a/screens/praise.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:seb7a/screens/praise_competition.dart';
+import 'package:seb7a/screens/sleeping_azkar.dart';
 import 'package:seb7a/widgets/show_message.dart';
 import 'package:share/share.dart';
 import 'morning_azkar.dart';
@@ -153,9 +155,18 @@ class _HomeState extends State<Home> {
         Share.share('https://play.google.com/store/apps/details?id=com.assem.tasabeh');
         break;
       case 2:
-        print("User Logged out");
+        _launchURL('a7med.assem@gmail.com', 'Tasabee7 Suggestions',);
         break;
     }
+  }
+
+  _launchURL(String toMailId, String subject) async {
+    final Email email = Email(
+      subject: 'Tasabee7 Suggestions',
+      recipients: ['a7med.assem@gmail.com'],
+      isHTML: false,
+    );
+    await FlutterEmailSender.send(email);
   }
 
   @override
@@ -181,6 +192,7 @@ class _HomeState extends State<Home> {
               color: Colors.white,
               itemBuilder: (context) => [
                 PopupMenuItem<int>(value: 0, child: Text("setting".tr().toString() , style: TextStyle(color: Colors.black),)),
+                PopupMenuItem<int>(value: 2, child: Text("suggestions".tr().toString() , style: TextStyle(color: Colors.black),)),
                 PopupMenuItem<int>(value: 1, child: Text("shareApp".tr().toString() , style: TextStyle(color: Colors.black),)),
               ],
               onSelected: (item) => SelectedItem(context, item),
@@ -248,6 +260,14 @@ class _HomeState extends State<Home> {
                 text: "EvningAzkar".tr().toString(),
                 gradientColors: [secondColor, firstColor],
                 onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) => EvningAzkar())),
+              ),
+              SizedBox(height: 20,),
+              NiceButton(
+                radius: 40,
+                padding: const EdgeInsets.all(15),
+                text: "sleepingAzkar".tr().toString(),
+                gradientColors: [secondColor, firstColor],
+                onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) => SleepingAzkar())),
               ),
             ],
           ),
