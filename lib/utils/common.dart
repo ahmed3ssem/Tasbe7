@@ -2,5 +2,5 @@ class Common{
 
   static bool isVibrate = true;
   static bool isSound = true;
-  static int fontSize = 10;
+  static double fontSize = 10;
 }

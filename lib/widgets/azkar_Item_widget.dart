@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:seb7a/utils/common.dart';
 import 'package:share/share.dart';
 
 
@@ -36,9 +37,9 @@ class AzkarItem extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Text(description , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 15),),
+                Text(description , style: TextStyle(fontWeight: FontWeight.bold , fontSize: Common.fontSize),),
                 SizedBox(height: 8,),
-                Text(value , style: TextStyle(fontSize: 16),)
+                Text(value , style: TextStyle(fontSize: Common.fontSize),)
               ],
             ),
           ),
@@ -51,10 +52,10 @@ class AzkarItem extends StatelessWidget {
                   Text("repeat".tr().toString(), style: TextStyle(fontWeight: FontWeight.bold , color: Colors.white),),
                   SizedBox(width: 5,),
                   Container(
-                    width: 30,
-                    height: 30,
+                    width: Common.fontSize >20 ?40 : 60,
+                    height: Common.fontSize >20 ?40 : 60,
                     child: Center(
-                      child: Text(number),
+                      child: Text(number , style: TextStyle(fontSize: Common.fontSize),),
                     ),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,

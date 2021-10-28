@@ -5,6 +5,8 @@ import 'package:flutter_beautiful_popup/main.dart';
 import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:seb7a/utils/common.dart';
 import 'package:vibration/vibration.dart';
 
 class Praisecompetition extends StatefulWidget {
@@ -24,8 +26,7 @@ class _PraisecompetitionState extends State<Praisecompetition> {
 
   ConfettiController _controllerBottomCenter;
   var buttonColor = Colors.red;
-  bool isVibrate = true;
-  bool isSound = true;
+  AudioPlayer player = AudioPlayer();
 
   @override
   void initState() {
@@ -142,18 +143,18 @@ class _PraisecompetitionState extends State<Praisecompetition> {
                  Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("عدد التسبيحات" , style: TextStyle(color: Colors.white ,fontWeight: FontWeight.bold , fontSize: 20),),
+                    Text("عدد التسبيحات" , style: TextStyle(color: Colors.white ,fontWeight: FontWeight.bold , fontSize: Common.fontSize+5),),
                     SizedBox(width: 50,),
-                    Text(widget.initialValue.toString() , style: TextStyle(color: Colors.white , fontSize: 50 , fontWeight: FontWeight.bold),),
+                    Text(widget.initialValue.toString() , style: TextStyle(color: Colors.white , fontSize: Common.fontSize+5 , fontWeight: FontWeight.bold),),
                   ],
                 ),
               SizedBox(height: 25,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("الحد الاقصى للتسبيح" , style: TextStyle(color: Colors.white ,fontWeight: FontWeight.bold , fontSize: 20),),
+                  Text("الحد الاقصى للتسبيح" , style: TextStyle(color: Colors.white ,fontWeight: FontWeight.bold , fontSize: Common.fontSize+5),),
                   SizedBox(width: 10,),
-                  Text(widget.maxValue.toString() , style: TextStyle(color: Colors.white , fontSize: 50 , fontWeight: FontWeight.bold),),
+                  Text(widget.maxValue.toString() , style: TextStyle(color: Colors.white , fontSize: Common.fontSize+5 , fontWeight: FontWeight.bold),),
                 ],
               ),
               SizedBox(height: 100,),
@@ -165,8 +166,12 @@ class _PraisecompetitionState extends State<Praisecompetition> {
                   color: buttonColor,
                   onPressed: (){
                     setState(() {
-                      if(isVibrate){
-                        Vibration.vibrate(duration: 50);
+                      if(Common.isSound){
+                        player.setAsset('assets/sounds/buttonsound.mp3');
+                        player.play();
+                      }
+                      if(Common.isVibrate){
+                        Vibration.vibrate(duration: 60);
                       }
                       if(widget.initialValue < widget.maxValue){
                         widget.initialValue++;

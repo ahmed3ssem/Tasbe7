@@ -3,16 +3,18 @@ import 'package:flutter/services.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:nice_button/NiceButton.dart';
 import 'package:seb7a/helper/db_helper.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:seb7a/helper/save_offline.dart';
 import 'package:seb7a/screens/evning_azkar.dart';
 import 'package:seb7a/screens/my_praises.dart';
 import 'package:seb7a/screens/praise.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:seb7a/screens/praise_competition.dart';
 import 'package:seb7a/screens/sleeping_azkar.dart';
+import 'package:seb7a/utils/common.dart';
 import 'package:seb7a/widgets/show_message.dart';
 import 'package:share/share.dart';
 import 'morning_azkar.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -27,8 +29,10 @@ class _HomeState extends State<Home> {
   bool checkPraiseExist;
   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
   int id;
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+  double _value = 10;
+  bool _isVibrate = false;
+  bool _isSound = false;
+
 
   void addNewPraise(BuildContext context) async {
     return showDialog(
@@ -150,6 +154,7 @@ class _HomeState extends State<Home> {
   void SelectedItem(BuildContext context, item) {
     switch (item) {
       case 0:
+        settingDialog();
         break;
       case 1:
         Share.share('https://play.google.com/store/apps/details?id=com.assem.tasabeh');
@@ -169,16 +174,110 @@ class _HomeState extends State<Home> {
     await FlutterEmailSender.send(email);
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
+  void settingDialog() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text("setting".tr().toString()),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              content: SingleChildScrollView(
+                child: Container(
+                  height: 195,
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.only(right: 10 , left: 10),
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(right: 12),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text('fontSize'.tr().toString() , style: TextStyle(color: Colors.black , fontSize: 15),),
+                        ),
+                      ),
+                      SfSlider(
+                        min: 10,
+                        max: 30,
+                        value: Common.fontSize,
+                        interval: 5,
+                        showTicks: true,
+                        showLabels: true,
+                        minorTicksPerInterval: 1,
+                        onChanged: (dynamic value){
+                          setState(() {
+                            Common.fontSize = value;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 15,),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              new Checkbox(
+                                  value: Common.isSound,
+                                  onChanged: (val)=> setState(() {Common.isSound = val;})
+                              ),
+                               Text(
+                                'applySound'.tr().toString(),
+                                style: const TextStyle(fontSize: 15.0),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              new Checkbox(
+                                  value: Common.isVibrate,
+                                  onChanged: (val)=> setState(() {Common.isVibrate = val;})
+                              ),
+                               Text(
+                                'applyVibrate'.tr().toString(),
+                                style: const TextStyle(fontSize: 15.0),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('dialogEditButton'.tr().toString()),
+                  onPressed: () {
+                    setState((){
+                      SaveOffline.saveSetting(Common.fontSize, Common.isVibrate, Common.isSound);
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
+                FlatButton(
+                    child: Text('dialogCancleButton'.tr().toString() , style: TextStyle(color: Colors.red),),
+                    onPressed: ()=>Navigator.pop(context)
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //drawer: AppDrawer(),
       appBar: AppBar(
         title: Text("homeAppBarTittle".tr().toString() , style: TextStyle(fontWeight: FontWeight.bold),),
         centerTitle: true,
@@ -213,7 +312,7 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 100,),
+              SizedBox(height: 70,),
               NiceButton(
                   radius: 40,
                   padding: const EdgeInsets.all(15),

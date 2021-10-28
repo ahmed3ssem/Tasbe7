@@ -1,12 +1,12 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:seb7a/helper/db_helper.dart';
-import 'package:seb7a/helper/save_offline.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:seb7a/screens/home.dart';
+import 'package:seb7a/utils/common.dart';
 import 'package:seb7a/widgets/show_message.dart';
 import 'package:vibration/vibration.dart';
 
@@ -28,10 +28,7 @@ class _PraiseState extends State<Praise> {
   String name = '';
   int value = -1;
   Color buttonColor = HexColor("D6A472");
-  bool isVibrate = true;
-  bool isSound = true;
-  AudioCache _audioCache = new AudioCache();
-  final alarmAudioPath = "buttonsound.mp3";
+  AudioPlayer player = AudioPlayer();
 
   void clearPraise(BuildContext context){
     showDialog(
@@ -181,10 +178,10 @@ class _PraiseState extends State<Praise> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _audioCache = AudioCache(
-      prefix: 'assets/sounds/',
-      fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP),
-    );
+    // _audioCache = AudioCache(
+    //   prefix: 'assets/sounds/',
+    //   fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP),
+    // );
   }
   @override
   Widget build(BuildContext context) {
@@ -222,7 +219,7 @@ class _PraiseState extends State<Praise> {
               SizedBox(height:35,),
               //Max value is = million
               Center(
-                child: Text(widget.value.toString() , style: TextStyle(color: Colors.white , fontSize: 70 , fontWeight: FontWeight.bold),),
+                child: Text(widget.value.toString() , style: TextStyle(color: Colors.white , fontSize: Common.fontSize+60 , fontWeight: FontWeight.bold),),
               ),
               SizedBox(height: 70,),
               Container(
@@ -231,16 +228,19 @@ class _PraiseState extends State<Praise> {
                 child: MaterialButton(
                   shape: CircleBorder(side: BorderSide(width: 1,)),
                   child: Center(
-                    child: Text('clickHere'.tr().toString() , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 30),),
+                    child: Text('clickHere'.tr().toString() , style: TextStyle(fontWeight: FontWeight.bold , fontSize: Common.fontSize+10),),
                   ),
                   color: buttonColor,
-                  onPressed: (){
+                  onPressed: () {
                     setState(() {
-                      _audioCache.play('buttonsound.mp3');
-                      widget.value++;
-                      if(isVibrate){
-                        Vibration.vibrate(duration: 50);
+                      if(Common.isSound){
+                        player.setAsset('assets/sounds/buttonsound.mp3');
+                        player.play();
                       }
+                      if(Common.isVibrate){
+                        Vibration.vibrate(duration: 60);
+                      }
+                      widget.value++;
                       //HapticFeedback.heavyImpact();
                       DBHelper.editValue(widget.id, widget.value).then((_) => print('success')).catchError((e) =>print(e));
                     });

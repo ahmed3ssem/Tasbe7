@@ -7,12 +7,13 @@ class SaveOffline{
     final SharedPreferences prefs = await _prefs;
     return prefs.containsKey('isVibrate');
   }
-  static Future<void> saveSetting(int fontSize , bool isVibrate , bool isSound) async{
+
+  static Future<void> saveSetting(double fontSize , bool isVibrate , bool isSound) async{
     Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
     final SharedPreferences prefs = await _prefs;
     prefs.setBool('isVibrate', isVibrate);
     prefs.setBool('isSound', isSound);
-    prefs.setInt('size', fontSize);
+    prefs.setDouble('size', fontSize);
   }
 
   static Future<bool> isVibrateSetting() async{
@@ -27,9 +28,9 @@ class SaveOffline{
     return prefs.getBool('isSound');
   }
 
-  static Future<int> fontSizeSetting() async{
+  static Future<double> fontSizeSetting() async{
     Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
     final SharedPreferences prefs = await _prefs;
-    return prefs.getInt('size');
+    return prefs.getDouble('size');
   }
 }

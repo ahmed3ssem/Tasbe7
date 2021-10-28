@@ -35,11 +35,10 @@ dependencies:
   sqflite: ^2.0.0+3
   divine_card: ^0.1.0
   share: ^2.0.4
-  timezone: ^0.8.0
-  audioplayers: ^0.20.1
+  syncfusion_flutter_sliders: ^19.0.0
   shared_preferences: ^2.0.8
   flutter_email_sender: ^5.0.2
-  flutter_local_notifications: ^9.0.1
+  just_audio: ^0.9.14
   flutter_localizations: # Add this line
     sdk: flutter
 
