@@ -36,5 +36,15 @@
   "sleepingAzkar": "اذكار قبل النوم",
   "applySound": "تفعيل الصوت",
   "applyVibrate" : "تفعيل الاهتزاز",
-  "fontSize": "حجم الخط"
+  "fontSize": "حجم الخط",
+  "notificationBody1": "هل صليت على النبى اليوم؟",
+  "notificationBody2": "ما تيجى نستغفر شويه ",
+  "notificationBody3": "افتكرت ذكر ربنا النهارده ؟",
+  "notificationBody4": "ايه رايك لما نيجى نسبح سوا :) ",
+  "notificationBody5": "سبجان الله ",
+  "notificationBody6": "",
+  "notificationBody7": "",
+  "notificationBody8": "",
+  "notificationBody9": ""
+
 }

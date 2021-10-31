@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:nice_button/NiceButton.dart';
 import 'package:seb7a/helper/db_helper.dart';
+import 'package:seb7a/helper/notification_service.dart';
 import 'package:seb7a/helper/save_offline.dart';
 import 'package:seb7a/screens/evning_azkar.dart';
 import 'package:seb7a/screens/my_praises.dart';
@@ -29,10 +30,6 @@ class _HomeState extends State<Home> {
   bool checkPraiseExist;
   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
   int id;
-  double _value = 10;
-  bool _isVibrate = false;
-  bool _isSound = false;
-
 
   void addNewPraise(BuildContext context) async {
     return showDialog(
@@ -273,6 +270,14 @@ class _HomeState extends State<Home> {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    NotificationService service = new NotificationService();
+    service.repeatNotification();
   }
 
   @override

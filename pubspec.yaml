@@ -38,6 +38,7 @@ dependencies:
   syncfusion_flutter_sliders: ^19.0.0
   shared_preferences: ^2.0.8
   flutter_email_sender: ^5.0.2
+  flutter_local_notifications: ^9.0.1
   just_audio: ^0.9.14
   flutter_localizations: # Add this line
     sdk: flutter

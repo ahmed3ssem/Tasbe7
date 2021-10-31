@@ -52,8 +52,8 @@ class AzkarItem extends StatelessWidget {
                   Text("repeat".tr().toString(), style: TextStyle(fontWeight: FontWeight.bold , color: Colors.white),),
                   SizedBox(width: 5,),
                   Container(
-                    width: Common.fontSize >20 ?40 : 60,
-                    height: Common.fontSize >20 ?40 : 60,
+                    width: Common.fontSize >20 ?60 : 40,
+                    height: Common.fontSize >20 ?60 : 40,
                     child: Center(
                       child: Text(number , style: TextStyle(fontSize: Common.fontSize),),
                     ),
