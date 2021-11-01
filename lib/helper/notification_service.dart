@@ -30,7 +30,8 @@ class NotificationService{
     NotificationDetails platformChannelSpecifics =
     NotificationDetails(android: _androidNotificationDetails);
     await flutterLocalNotificationsPlugin.periodicallyShow(0, 'appName'.tr().toString(),
-        'notificationBody'.tr().toString(), RepeatInterval.daily, platformChannelSpecifics,
+        'notificationBody'.tr().toString(), RepeatInterval.everyMinute, platformChannelSpecifics,
         androidAllowWhileIdle: true);
+    //for emoji Mac: hit Control + Command + Space , Windows:key" + ; (semicolon).
   }
 }
