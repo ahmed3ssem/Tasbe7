@@ -273,14 +273,6 @@ class _HomeState extends State<Home> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    NotificationService service = new NotificationService();
-    service.repeatNotification();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

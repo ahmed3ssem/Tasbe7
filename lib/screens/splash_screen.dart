@@ -13,10 +13,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+  NotificationService _notificationService = NotificationService();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _notificationService.scheduleNotifications();
     SaveOffline.isFirstTime().then((value){
       if(value){
         SaveOffline.isVibrateSetting().then((value){

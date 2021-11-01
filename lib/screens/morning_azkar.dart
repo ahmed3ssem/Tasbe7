@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:seb7a/widgets/azkar_Item_widget.dart';
+import 'package:seb7a/utils/common.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:share/share.dart';
 
 
 class Morningazkar extends StatefulWidget {
@@ -43,7 +44,90 @@ class _MorningazkarState extends State<Morningazkar> {
           //shape: BoxShape.circle,
         ),
         child: ListView.builder(physics:BouncingScrollPhysics() , itemCount: morningAzkar.length , itemBuilder: (ctx , pos){
-          return AzkarItem(description: morningAzkar[pos]['name'],value: morningAzkar[pos]['benefit'],number: morningAzkar[pos]['number']);
+          return Container(
+            margin: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                    Radius.circular(15.0) //                 <--- border radius here
+                ),
+                color: Colors.blue
+            ),
+            child: InkWell(
+              child: Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    //margin: const EdgeInsets.all(1),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(15.0) //                 <--- border radius here
+                        ),
+                        color: Colors.white
+                    ),
+                    child: Column(
+                      children: [
+                        Text(morningAzkar[pos]['name'] , style: TextStyle(fontWeight: FontWeight.bold , fontSize: Common.fontSize),),
+                        SizedBox(height: 8,),
+                        Text(morningAzkar[pos]['benefit'] , style: TextStyle(fontSize: Common.fontSize),)
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 8,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        children: [
+                          Text("repeat".tr().toString(), style: TextStyle(fontWeight: FontWeight.bold , color: Colors.white),),
+                          SizedBox(width: 5,),
+                          Container(
+                            width: Common.fontSize >20 ?60 : 40,
+                            height: Common.fontSize >20 ?60 : 40,
+                            child: Center(
+                              child: Text(morningAzkar[pos]['number'], style: TextStyle(fontSize: Common.fontSize),),
+                            ),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white),
+                          ),
+                        ],
+                      ),
+                      InkWell(
+                        onTap: (){
+                          Share.share('الذكر:'+"\n"+morningAzkar[pos]['name']+"\n"+morningAzkar[pos]['benefit']+"\n"+"عدد المرات= "+morningAzkar[pos]['number']);
+                        },
+                        child: Row(
+                          children: [
+                            Text("share".tr().toString(), style: TextStyle(fontWeight: FontWeight.bold , color: Colors.white),),
+                            SizedBox(width: 2,),
+                            IconButton(
+                                onPressed: (){},
+                                icon: Icon(Icons.share , color: Colors.white,))
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 6,)
+                ],
+              ),
+              onTap: (){
+                int number = int.parse(morningAzkar[pos]['number']);
+                if(number>=1){
+                  setState(() {
+                    number--;
+                    morningAzkar[pos]['number'] = number.toString();
+                  });
+                }
+                if(number == 0){
+                  setState(() {
+                    morningAzkar.removeAt(pos);
+                  });
+                }
+              },
+            ),
+          );
         }),
       ),
     );
