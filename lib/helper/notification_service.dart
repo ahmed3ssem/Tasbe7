@@ -17,7 +17,7 @@ class NotificationService{
 
   Future<void> init() async {
     final AndroidInitializationSettings initializationSettingsAndroid =
-    AndroidInitializationSettings('@mipmap/ic_launcher');
+    AndroidInitializationSettings('ic_launcher');
 
 
     final InitializationSettings initializationSettings =
@@ -30,7 +30,7 @@ class NotificationService{
     NotificationDetails platformChannelSpecifics =
     NotificationDetails(android: _androidNotificationDetails);
     await flutterLocalNotificationsPlugin.periodicallyShow(0, 'appName'.tr().toString(),
-        'notificationBody'.tr().toString(), RepeatInterval.everyMinute, platformChannelSpecifics,
+        'notificationBody'.tr().toString(), RepeatInterval.daily, platformChannelSpecifics,
         androidAllowWhileIdle: true);
     //for emoji Mac: hit Control + Command + Space , Windows:key" + ; (semicolon).
   }

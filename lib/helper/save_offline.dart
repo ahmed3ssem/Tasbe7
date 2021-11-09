@@ -33,4 +33,17 @@ class SaveOffline{
     final SharedPreferences prefs = await _prefs;
     return prefs.getDouble('size');
   }
+
+  static Future<void> firstTimeUpdate() async{
+    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+    final SharedPreferences prefs = await _prefs;
+    prefs.setString('firstTime', 'No');
+  }
+
+  static Future<bool> isFirstTimeUpdate() async{
+    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+    final SharedPreferences prefs = await _prefs;
+    return prefs.containsKey('firstTime');
+
+  }
 }

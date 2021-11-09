@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:nice_button/NiceButton.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 import 'package:seb7a/helper/db_helper.dart';
 import 'package:seb7a/helper/notification_service.dart';
 import 'package:seb7a/helper/save_offline.dart';
@@ -14,6 +15,7 @@ import 'package:seb7a/screens/sleeping_azkar.dart';
 import 'package:seb7a/utils/common.dart';
 import 'package:seb7a/widgets/show_message.dart';
 import 'package:share/share.dart';
+import 'package:store_redirect/store_redirect.dart';
 import 'morning_azkar.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -30,6 +32,30 @@ class _HomeState extends State<Home> {
   bool checkPraiseExist;
   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
   int id;
+
+  final _dialog = RatingDialog(
+    // your app's name?
+    title: Text('rateUsDialogTitle'.tr().toString()),
+    // encourage your user to leave a high rating?
+    message:
+    Text('rateUsDialogMessage'.tr().toString()),
+    // your app's logo?
+    image:  Image.asset('assets/image/appicon.jpeg',width: 50,height: 50,),
+    submitButtonText: 'submit'.tr().toString(),
+    commentHint: 'commentHint'.tr().toString(),
+    onCancelled: () => print('cancelled'),
+    onSubmitted: (response) {
+      print('rating: ${response.rating}, comment: ${response.comment}');
+      // TODO: add your own logic
+      if (response.rating < 3.0) {
+        // send their comments to your email or anywhere you wish
+        // ask the user to contact you instead of leaving a bad review
+      } else {
+        //go to app store
+        StoreRedirect.redirect(androidAppId: 'com.assem.tasabeh');
+      }
+    },
+  );
 
   void addNewPraise(BuildContext context) async {
     return showDialog(
@@ -159,6 +185,11 @@ class _HomeState extends State<Home> {
       case 2:
         _launchURL('a7med.assem@gmail.com', 'Tasabee7 Suggestions',);
         break;
+      case 3:
+        showDialog(
+          context: context,
+          builder: (context) => _dialog,
+        );
     }
   }
 
@@ -290,6 +321,7 @@ class _HomeState extends State<Home> {
                 PopupMenuItem<int>(value: 0, child: Text("setting".tr().toString() , style: TextStyle(color: Colors.black),)),
                 PopupMenuItem<int>(value: 2, child: Text("suggestions".tr().toString() , style: TextStyle(color: Colors.black),)),
                 PopupMenuItem<int>(value: 1, child: Text("shareApp".tr().toString() , style: TextStyle(color: Colors.black),)),
+                PopupMenuItem<int>(value: 3, child: Text("rateUs".tr().toString() , style: TextStyle(color: Colors.black),)),
               ],
               onSelected: (item) => SelectedItem(context, item),
             ),

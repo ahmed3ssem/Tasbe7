@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
+import 'package:seb7a/helper/save_offline.dart';
 import 'package:seb7a/utils/common.dart';
 import 'package:share/share.dart';
 
@@ -20,6 +21,42 @@ class _EvningAzkarState extends State<EvningAzkar> {
   Future<void> loadData() async {
     var data = await rootBundle.loadString('resources/evning_azkar.json');
     setState(() => evningAzkar = json.decode(data));
+    SaveOffline.isFirstTimeUpdate().then((value){
+      if(!value){
+        firstTimeDialog();
+      }
+    });
+  }
+
+  void firstTimeDialog() async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0))
+          ),
+          //title: Text('TextField in Dialog'),
+          content: SingleChildScrollView(
+            child: Container(
+              height: 130,
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.only(right: 10 , left: 10),
+              child: Text('azkarDialogText'.tr().toString()),
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+                child: Text('ok'.tr().toString() , style: TextStyle(color: Colors.green),),
+                onPressed: (){
+                  SaveOffline.firstTimeUpdate();
+                  Navigator.pop(context);
+                }
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
