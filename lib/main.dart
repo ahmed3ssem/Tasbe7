@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:seb7a/screens/home.dart';
 import 'package:seb7a/screens/splash_screen.dart';
-
 import 'helper/notification_service.dart';
 
 void main() async{

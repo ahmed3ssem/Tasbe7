@@ -17,7 +17,7 @@ class NotificationService{
 
   Future<void> init() async {
     final AndroidInitializationSettings initializationSettingsAndroid =
-    AndroidInitializationSettings('ic_launcher');
+    AndroidInitializationSettings('praying');
 
 
     final InitializationSettings initializationSettings =

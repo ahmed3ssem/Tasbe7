@@ -202,6 +202,7 @@ class _HomeState extends State<Home> {
     await FlutterEmailSender.send(email);
   }
 
+
   void settingDialog() async {
     showDialog(
       context: context,
