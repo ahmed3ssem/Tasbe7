@@ -7,7 +7,7 @@
   "challenageDialogTextFieldValue": "قيمة الذكر*",
   "dialogCancleButton": "الغاء",
   "dialogAddButton": "إضافة",
-  "addPraise": "إضافة ذكر",
+  "addPraise": "إضافة تسبيح",
   "dialogMissingDataError": "ادخل اسم الذكر",
   "challengDialogMissingDataError": "ادخل اسم و قيمة الذكر",
   "dialogPraiseValueError": "ادخل قيمه الذكر بشكل صحيح",
@@ -43,5 +43,10 @@
   "rateUsDialogMessage": "قولنا تقيمك للتطبيق من 1 ل 5 ",
   "submit": "تقييم",
   "commentHint": "قولنا رايك و اقتراحاتك",
-  "azkarDialogText": "تسهيلا عليك عزيزي القارئ , يمكنك الان بعد قراءه كل ذكر , الضغط عليه فسيتم تقليل عدد مرات القراءه الى ان يختفى الذكر تماما من الصفحة"
+  "azkarDialogText": "تسهيلا عليك عزيزي القارئ , يمكنك الان بعد قراءه كل ذكر , الضغط عليه فسيتم تقليل عدد مرات القراءه الى ان يختفى الذكر تماما من الصفحة",
+  "prayers": "أدعية",
+  "propheticPrayers": "أدعية نبوية",
+  "quranPrayers": "أدعية قرآنية",
+  "azkar": "الأذكار",
+  "prayingAzkar": "أذكار بعد الصلاة"
 }

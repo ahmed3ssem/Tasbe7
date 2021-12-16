@@ -11,11 +11,13 @@ import 'package:seb7a/screens/my_praises.dart';
 import 'package:seb7a/screens/praise.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:seb7a/screens/praise_competition.dart';
+import 'package:seb7a/screens/praying_azkar.dart';
 import 'package:seb7a/screens/sleeping_azkar.dart';
 import 'package:seb7a/utils/common.dart';
 import 'package:seb7a/widgets/show_message.dart';
 import 'package:share/share.dart';
 import 'package:store_redirect/store_redirect.dart';
+import 'duases.dart';
 import 'morning_azkar.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -109,6 +111,87 @@ class _HomeState extends State<Home> {
                 onPressed: ()=>Navigator.pop(context)
             ),
           ],
+        );
+      },
+    );
+  }
+
+  void azkar(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0))
+          ),
+          //title: Text('TextField in Dialog'),
+          content: Container(
+            padding: const EdgeInsets.all(5),
+            height: 150,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        Navigator.pop(context);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Morningazkar()));
+                      },
+                      child: Card(
+                        color: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        elevation: 5,
+                        child: Container(
+                          padding: const EdgeInsets.only(top: 10 , bottom: 10, right: 15 , left: 15),
+                          child: Text("MorningAzkar".tr().toString(), style: TextStyle(color: Colors.white , fontSize: 22),),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: (){
+                        Navigator.pop(context);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => EvningAzkar()));
+                      },
+                      child: Card(
+                        color: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        elevation: 5,
+                        child: Container(
+                          padding: const EdgeInsets.only(top: 10 , bottom: 10, right: 15 , left: 15),
+                          child: Text("EvningAzkar".tr().toString(), style: TextStyle(color: Colors.white , fontSize: 22),),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Center(
+                  child: InkWell(
+                    onTap:(){
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SleepingAzkar()));
+                    },
+                    child: Card(
+                      color: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      elevation: 5,
+                      child: Container(
+                        padding: const EdgeInsets.only(top: 10 , bottom: 10, right: 15 , left: 15),
+                        child: Text("sleepingAzkar".tr().toString(), style: TextStyle(color: Colors.white , fontSize: 22),),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+
+            ),
+          ),
         );
       },
     );
@@ -378,25 +461,17 @@ class _HomeState extends State<Home> {
               NiceButton(
                 radius: 40,
                 padding: const EdgeInsets.all(15),
-                text: "MorningAzkar".tr().toString(),
+                text: "azkar".tr().toString(),
                 gradientColors: [secondColor, firstColor],
-                onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) => Morningazkar())),
+                onPressed: ()=>azkar(context),
               ),
               SizedBox(height: 20,),
               NiceButton(
                 radius: 40,
                 padding: const EdgeInsets.all(15),
-                text: "EvningAzkar".tr().toString(),
+                text: "prayers".tr().toString(),
                 gradientColors: [secondColor, firstColor],
-                onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) => EvningAzkar())),
-              ),
-              SizedBox(height: 20,),
-              NiceButton(
-                radius: 40,
-                padding: const EdgeInsets.all(15),
-                text: "sleepingAzkar".tr().toString(),
-                gradientColors: [secondColor, firstColor],
-                onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) => SleepingAzkar())),
+                onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) => Duases())),
               ),
             ],
           ),
