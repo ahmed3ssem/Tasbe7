@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:seb7a/helper/notification_service.dart';
 import 'package:seb7a/helper/save_offline.dart';
-import 'package:seb7a/screens/home.dart';
 import 'package:seb7a/utils/common.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:seb7a/view/home/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
 
@@ -40,14 +41,14 @@ class _SplashScreenState extends State<SplashScreen> {
       } else {
         setState(() {
           SaveOffline.saveSetting(15.0, true, true);
-          Common.fontSize = 15.0;
+          Common.fontSize = 15.0.sp;
           Common.isSound = true;
           Common.isVibrate = true;
         });
       }
     });
     Future.delayed(Duration(seconds: 1), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home(),));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
     });
   }
 
@@ -68,8 +69,8 @@ class _SplashScreenState extends State<SplashScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircularProgressIndicator(strokeWidth: 10,backgroundColor: Colors.white,),
-                SizedBox(height: 5,),
-                Text('welcomeMessage'.tr().toString() , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 25 , color: Colors.white),)
+                SizedBox(height: ScreenUtil().setHeight(5),),
+                Text('welcomeMessage'.tr().toString() , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 25.sp , color: Colors.white),)
               ],
             ),
           )

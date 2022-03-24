@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ToastMessage{
 
@@ -11,7 +11,7 @@ class ToastMessage{
         gravity: ToastGravity.BOTTOM,
         backgroundColor: color,
         textColor: Colors.white,
-        fontSize: 16.0
+        fontSize: 16.0.sp
     );
   }
 }

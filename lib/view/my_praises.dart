@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seb7a/helper/db_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:seb7a/screens/praise.dart';
+import 'package:seb7a/view/praise.dart';
 
 class MyPraises extends StatefulWidget {
   const MyPraises({Key key}) : super(key: key);

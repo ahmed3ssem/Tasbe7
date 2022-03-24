@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:seb7a/helper/db_helper.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:seb7a/screens/home.dart';
 import 'package:seb7a/utils/common.dart';
+import 'package:seb7a/view/home/home_screen.dart';
 import 'package:seb7a/widgets/show_message.dart';
 import 'package:vibration/vibration.dart';
 
@@ -79,7 +79,7 @@ class _PraiseState extends State<Praise> {
               FlatButton(
                   onPressed: (){
                     DBHelper.removePraise(widget.id);
-                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Home()), (Route<dynamic> route) => false);
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomeScreen()), (Route<dynamic> route) => false);
                   },
                   child: Text("yesButton".tr().toString())
 

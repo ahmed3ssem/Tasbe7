@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:seb7a/screens/propheticprayers.dart';
-import 'package:seb7a/screens/quran_prayers.dart';
+import 'package:seb7a/view/propheticprayers.dart';
+import 'package:seb7a/view/quran_prayers.dart';
+
+
 
 class Duases extends StatefulWidget {
 
